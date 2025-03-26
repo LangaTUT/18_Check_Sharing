@@ -28,8 +28,10 @@ def send_email(ip_address, watermark_id):
             server.login(os.getenv("EMAIL_ADDRESS"), os.getenv("EMAIL_PASSWORD"))  # Use environment variables
             server.sendmail(os.getenv("EMAIL_ADDRESS"), os.getenv("EMAIL_ADDRESS"), message.as_string())
         print("Email notification sent successfully.")
-    except smtplib.SMTPException as e:
-        print(f"Failed to send email: {e}")
+    except Exception as e:  # Broad exception catch
+        print(f"SMTP FAILED: {str(e)}")
+        if hasattr(e, 'smtp_error'):
+            print(f"SMTP error detail: {e.smtp_error.decode()}")
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
