@@ -1,0 +1,7 @@
+Flask
+smtplib
+email
+PyPDF2
+reportlab
+requests
+python-dotenv
